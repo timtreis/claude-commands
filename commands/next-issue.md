@@ -1,5 +1,7 @@
 Find and suggest the next GitHub issue to work on.
 
+**Always use `gh` (GitHub CLI) for all GitHub interactions.** Do not use raw API calls, curl, or web scraping.
+
 ## Usage
 
 - `/next-issue` — suggest any good candidate

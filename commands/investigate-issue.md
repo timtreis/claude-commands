@@ -1,5 +1,7 @@
 Deep analysis of a GitHub issue — reproduces, plans, implements fix, and adds tests.
 
+**Always use `gh` (GitHub CLI) for all GitHub interactions** (issues, PRs, searches, API calls). Do not use raw curl, web scraping, or hardcoded URLs.
+
 ## Usage
 
 - `/investigate-issue 123` — investigate issue #123
