@@ -37,3 +37,4 @@ Start-of-session check-in. Review handoff documents and verify what's still rele
 - Do not modify source code.
 - Keep the status report concise and actionable.
 - If there are no open todos and no handoff docs, just say so and ask what the user wants to work on.
+- Always use `gh` (GitHub CLI) for all GitHub interactions. Do not use raw API calls, curl, or web scraping.

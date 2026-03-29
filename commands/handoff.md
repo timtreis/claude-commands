@@ -29,3 +29,4 @@ End-of-session handoff. Ensure all session work is documented in project-specifi
 - Create `tasks/` directory if it doesn't exist.
 - Keep `tasks/todo.md` organized by sections/themes, not chronologically.
 - Stage nothing and commit nothing — this is documentation only.
+- Always use `gh` (GitHub CLI) for all GitHub interactions. Do not use raw API calls, curl, or web scraping.
