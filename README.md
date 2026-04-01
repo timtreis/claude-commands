@@ -8,6 +8,7 @@ Reusable Claude Code custom slash commands.
 - **`/handoff`** — End-of-session handoff. Summarizes session work, updates todo/lessons files, and prints a handoff summary for the next session.
 - **`/next-issue`** — Find and suggest the next GitHub issue to work on. Optionally filter by label (e.g., `/next-issue bug`).
 - **`/investigate-issue`** — Deep analysis of a GitHub issue: reproduces the bug, creates a fix plan, implements, and adds tests. Usage: `/investigate-issue 123`.
+- **`/adversarial-review`** — Adversarial code review that challenges design choices, tradeoffs, and assumptions. Ported from [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc). Usage: `/adversarial-review --base main [focus area]`.
 
 ## Installation
 
