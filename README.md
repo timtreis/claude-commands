@@ -9,7 +9,7 @@ Reusable Claude Code custom slash commands.
 - **`/next-issue`** — Find and suggest the next GitHub issue to work on. Optionally filter by label (e.g., `/next-issue bug`).
 - **`/investigate-issue`** — Deep analysis of a GitHub issue: reproduces the bug, creates a fix plan, implements, and adds tests. Usage: `/investigate-issue 123`.
 - **`/adversarial-review`** — Adversarial code review that challenges design choices, tradeoffs, and assumptions. Ported from [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc). Usage: `/adversarial-review --base main [focus area]`.
-- **`/dream`** — Overnight-style memory maintenance. Grooms the Claude Code auto-memory system (lint, link integrity, staleness checks, dedup, index hygiene) so future sessions start from a cleaner brain. A lightweight take on Garry Tan's GBrain "dream cycle" — markdown only, no database or cron.
+- **`/dream`** — Overnight-style memory maintenance. Grooms the Claude Code auto-memory system (lint, link integrity, staleness checks, dedup, guarded synthesis, index hygiene) so future sessions start from a cleaner brain. A lightweight take on Garry Tan's GBrain "dream cycle" — markdown only, no database or cron.
 
 ## Installation
 

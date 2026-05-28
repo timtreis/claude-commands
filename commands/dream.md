@@ -23,13 +23,19 @@ Overnight-style memory maintenance. Groom the Claude Code auto-memory system —
 
 6. **Consolidate (dedup / merge)**: Identify memories covering the same concern (same type + overlapping topic). For each cluster, propose a single merged memory: combined body, union of `[[links]]`, the clearest `name` kept, plus a one-line rationale and the list of files that would be removed. **Propose only.**
 
-7. **Index hygiene (orphans / purge)**: Reconcile `MEMORY.md` against the files on disk —
+7. **Synthesis candidates (propose-only, guarded)**: Look across *distinct* memories for a higher-order insight that none of them states alone — the "wake up smarter" step. Where several memories point at one root pattern, propose a single new synthesized memory.
+   - Only propose when a candidate draws on **≥3 distinct primary memories**. Never synthesize from a single memory or from a near-trivial pair (that's step 6's job).
+   - A proposed synthesis is a *new* memory carrying provenance frontmatter: `metadata.origin: dream-synthesis`, `metadata.synthesized_from: [name-a, name-b, name-c]`, `metadata.synthesized_on: <date>`. If accepted, each source memory gets `metadata.consolidated_into: <new-name>` and is kept as an audit trail.
+   - **Propose only.** Present: proposed name + type, the one-line insight, the source memories, and what happens to them. Write nothing without explicit confirmation.
+   - See the self-consumption guard in Rules — synthesis is the one generative step, so it is fenced hardest.
+
+8. **Index hygiene (orphans / purge)**: Reconcile `MEMORY.md` against the files on disk —
    - add a one-line index entry for any memory file missing from the index;
    - remove orphan index lines that point to deleted files;
    - keep each entry to one line, under ~150 chars, in the existing `- [Title](file.md) — hook` format;
    - the index must stay under 200 lines (the load truncation cap). If it's over, that is itself a consolidation signal — flag it.
 
-8. **Report & apply**: Print the Dream Report (format below). Apply the safe auto-fixes from steps 3, 4 (reporting only), and 7. For everything destructive — merges, deletions, content rewrites — present a numbered proposal list and ask before acting.
+9. **Report & apply**: Print the Dream Report (format below). Apply the safe auto-fixes from steps 3, 4 (reporting only), and 8. For everything destructive — merges, deletions, content rewrites, and all synthesis — present a numbered proposal list and ask before acting.
 
 ## Rules
 
@@ -40,6 +46,17 @@ Overnight-style memory maintenance. Groom the Claude Code auto-memory system —
 - Stay lightweight. This is markdown grooming, not a knowledge graph. No databases, embeddings, external services, or new tooling.
 - Be idempotent: a second run with no new memories and no accepted proposals should report "clean" and change nothing.
 
+### Synthesis self-consumption guard
+
+Synthesis is the only step that *creates* new memory, so it eats its own output unless fenced. Enforce all of these:
+
+- **Depth-1 only.** A memory with `origin: dream-synthesis` is **never** an input to another synthesis. Derived memory cannot beget derived memory — this caps the chain at one hop so noise can't compound run over run.
+- **Provenance is mandatory.** Every synthesized memory records `synthesized_from` + `origin`. If you can't record where it came from, don't write it — that's what makes future exclusion possible.
+- **Skip already-covered clusters (idempotency).** Before proposing, check existing `synthesized_from` sets. If a candidate's sources are already covered by a synthesized memory, skip it. A clean brain produces zero synthesis proposals on a repeat run.
+- **Exclude consolidated sources.** A memory marked `consolidated_into` is spent — never re-feed it into synthesis (otherwise the same cluster regenerates forever).
+- **Cap per run.** Surface at most ~3 synthesis proposals per run, strongest first; note the rest rather than dumping them.
+- **Human gate, always.** Synthesis never auto-writes and never auto-retires sources. The user is the final guard; the rules above keep the *proposals* themselves from degrading over time.
+
 ## Report format
 
 ```
@@ -49,6 +66,7 @@ Overnight-style memory maintenance. Groom the Claude Code auto-memory system —
 **Dangling links:** <[[x]] with no target, or "none">
 **Stale / contradicted (proposed):** <list with evidence, or "none">
 **Merge candidates (proposed):** <groups, or "none">
+**Synthesis candidates (proposed):** <new-memory ideas w/ sources, or "none">
 **Index:** <K> lines (under/over the 200-line cap)
-**Awaiting your OK:** <numbered list of destructive proposals, or "nothing">
+**Awaiting your OK:** <numbered list of destructive + synthesis proposals, or "nothing">
 ```
