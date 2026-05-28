@@ -1,4 +1,4 @@
-Overnight-style memory maintenance. Groom the Claude Code auto-memory system — validate, reconnect, de-duplicate, and prune the stored memories so future sessions start from a cleaner, more trustworthy brain. A lightweight take on Garry Tan's GBrain "dream cycle": no database, no embeddings, no cron — just the agent grooming its own markdown memory on demand.
+Overnight-style memory maintenance. Groom the Claude Code auto-memory system — validate, reconnect, de-duplicate, and prune the stored memories so future sessions start from a cleaner, more trustworthy brain. A lightweight take on Garry Tan's GBrain "dream cycle": no database, no embeddings, no cron — just the agent grooming its own markdown memory on demand. Companion to `/handoff`, which is the *capture* pass (writes memories at session end); `/dream` is the *maintenance* pass that consolidates and prunes what `/handoff` captured. Run `/dream` periodically so liberal capture doesn't outgrow the `MEMORY.md` load cap.
 
 ## Steps
 
