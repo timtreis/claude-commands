@@ -12,7 +12,17 @@ End-of-session handoff. Ensure all session work is documented in project-specifi
 
 3. **Update `tasks/lessons.md`**: If any corrections, surprises, or non-obvious patterns were discovered during the session, append them to `tasks/lessons.md` (create if needed). Each lesson should be a short rule with a "Why" line. Skip if nothing new was learned.
 
-4. **Update auto-memory**: Check whether any user preferences, project context, or external references were discovered that should persist across conversations. If so, write/update the appropriate memory files. Skip if nothing new.
+4. **Capture memories (auto-memory)**: This is the session's *capture* pass — the companion `/dream` command is the later *maintenance* pass (dedup, consolidate, prune). Because `/dream` consolidates afterward, **capture liberally here and let `/dream` clean up** — when in doubt, write it. Walk all four memory types and write one file per distinct fact worth carrying to a *future* session:
+   - **feedback** — did the user correct an approach (*"no, don't…"*, *"stop…"*) OR confirm a non-obvious one worked (*"yes, exactly"*, accepted an unusual choice without pushback)? Capture **both** — confirmations are quiet and easy to miss but keep you from drifting away from validated approaches. Body: the rule, then a **Why:** line and a **How to apply:** line.
+   - **user** — anything new about the user's role, expertise, preferences, or workflow that should shape how you collaborate next time.
+   - **project** — ongoing-work context, decisions, motivations, or deadlines NOT derivable from code/git (convert relative dates to absolute, e.g. "Thursday" → "2026-03-05").
+   - **reference** — external systems/resources and their purpose (dashboards, trackers, channels).
+
+   **Filter:** skip anything derivable from current code, git history, or CLAUDE.md, and anything ephemeral to this session. Keep only the surprising / non-obvious / cross-session-useful.
+
+   **Format each memory correctly so `/dream` has nothing to repair:** frontmatter (`name` in kebab-case matching the filename slug, `metadata.type`, and a *specific* one-line `description`), body linking related memories with `[[name]]`, AND add the matching one-line entry to `MEMORY.md`. Before creating, check existing memories — **update in place** if one already covers the concern rather than duplicating.
+
+   **Routing vs step 3:** a technical gotcha about *this codebase* → `tasks/lessons.md`; a durable fact about the *user, project context, or how to behave* → auto-memory. If it's genuinely both, prefer the single best home.
 
 5. **Print a handoff summary**: Output a short (5-10 line) summary formatted as:
    ```
@@ -20,6 +30,7 @@ End-of-session handoff. Ensure all session work is documented in project-specifi
    **Done:** <bullet list of completed items>
    **Open:** <bullet list of remaining/new todos>
    **Lessons:** <any new lessons added, or "none">
+   **Memories:** <new/updated memory files by name, or "none">
    **Next suggested focus:** <what to pick up next session>
    ```
 
@@ -29,4 +40,5 @@ End-of-session handoff. Ensure all session work is documented in project-specifi
 - Create `tasks/` directory if it doesn't exist.
 - Keep `tasks/todo.md` organized by sections/themes, not chronologically.
 - Stage nothing and commit nothing — this is documentation only.
+- Capture/groom loop: `/handoff` captures memories liberally; `/dream` consolidates, de-dupes, and prunes them. The pairing only works if `/dream` is run periodically — liberal capture without grooming will eventually push `MEMORY.md` past its ~200-line load cap.
 - Always use `gh` (GitHub CLI) for all GitHub interactions. Do not use raw API calls, curl, or web scraping.
