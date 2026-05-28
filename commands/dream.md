@@ -7,9 +7,10 @@ Overnight-style memory maintenance. Groom the Claude Code auto-memory system —
 2. **Inventory**: List every `*.md` memory file (excluding `MEMORY.md`). For each, read the frontmatter (`name`, `description`, `metadata.type`) and body. Build an internal table: file, name, type, one-line description, and the outbound `[[links]]` it contains.
 
 3. **Lint (auto-fix only safe issues)**: For each memory verify —
-   - frontmatter is present and parseable;
+   - frontmatter is present and parseable (note `type` is usually nested under `metadata:`);
    - `name` is kebab-case and matches the filename slug;
    - `metadata.type` is one of `user` / `feedback` / `project` / `reference`;
+   - the **filename prefix matches the declared type** — a `user_…` file typed `feedback` is a smell. **Flag it, do not auto-fix**: either the prefix or the type could be the intended one, and the content decides which.
    - `description` is a specific one-liner (not empty, not generic).
    Fix trivially-safe problems in place (e.g. normalize `name` to match the filename). Anything ambiguous — flag it, do not guess.
 
@@ -25,6 +26,7 @@ Overnight-style memory maintenance. Groom the Claude Code auto-memory system —
 
 7. **Synthesis candidates (propose-only, guarded)**: Look across *distinct* memories for a higher-order insight that none of them states alone — the "wake up smarter" step. Where several memories point at one root pattern, propose a single new synthesized memory.
    - Only propose when a candidate draws on **≥3 distinct primary memories**. Never synthesize from a single memory or from a near-trivial pair (that's step 6's job).
+   - **A shared *topic* is not enough.** The synthesis must assert something none of the source memories states on its own, AND that isn't already captured in a higher-level doc (e.g. `CLAUDE.md`). If the cluster is merely "these are all about X," do **not** propose it — that's the spurious-pattern trap. A real candidate reveals a connection, not a category.
    - A proposed synthesis is a *new* memory carrying provenance frontmatter: `metadata.origin: dream-synthesis`, `metadata.synthesized_from: [name-a, name-b, name-c]`, `metadata.synthesized_on: <date>`. If accepted, each source memory gets `metadata.consolidated_into: <new-name>` and is kept as an audit trail.
    - **Propose only.** Present: proposed name + type, the one-line insight, the source memories, and what happens to them. Write nothing without explicit confirmation.
    - See the self-consumption guard in Rules — synthesis is the one generative step, so it is fenced hardest.
