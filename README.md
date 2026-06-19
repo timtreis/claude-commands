@@ -10,6 +10,7 @@ Reusable Claude Code custom slash commands.
 - **`/investigate-issue`** — Deep analysis of a GitHub issue: reproduces the bug, creates a fix plan, implements, and adds tests. Usage: `/investigate-issue 123`.
 - **`/adversarial-review`** — Adversarial code review that challenges design choices, tradeoffs, and assumptions. Ported from [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc). Usage: `/adversarial-review --base main [focus area]`.
 - **`/dream`** — Overnight-style memory maintenance. Grooms the Claude Code auto-memory system (lint, link integrity, staleness checks, dedup, guarded synthesis, index hygiene) so future sessions start from a cleaner brain. A lightweight take on Garry Tan's GBrain "dream cycle" — markdown only, no database or cron.
+- **`/setup-diary`** — Scaffold a self-contained "working diary" into the current repo: a `CLAUDE.md` protocol that tells Claude to log every task, a `tasks.js` data file it maintains, a `diary.html` viewer (project name, auto-refresh, status filters, per-task cards), and a `diary-serve.sh` helper for viewing over a forwarded port on a remote/SSH host (e.g. a cluster). Idempotent — preserves an existing `tasks.js`.
 
 ## Installation
 
